@@ -47,6 +47,7 @@ class TaskWarriorSync(toodledo):
 
         from time import time
 
+        sync_start = time()
         useful_fields = ['folder', 'context', 'tag', 'duedate', 'priority']
 
         # Get a list of local tasks
@@ -75,7 +76,7 @@ class TaskWarriorSync(toodledo):
 
         # Upload edited tasks
         if self._lastsync:
-            ntasks = [self.__TWToToodledoTask(task) for task in ltasks if (task['entry'] > self._lastsync)]
+            ntasks = [self.__TWToToodledoTask(task) for task in ltasks if (task['entry'] > self._lastsync) and (task['entry'] < sync_start)]
             if ntasks: toodledo.EditTasks(self, ntasks)
             # Completed tasks
             if ctasks:
