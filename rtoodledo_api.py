@@ -11,8 +11,8 @@ class InformationError(Exception):
 class toodledo:
     """Class to allow interfacing to toodledo.com."""
 
-    _appid = "rtoodledo"
-    _apptoken = "api4d02a90ac00cb"
+    _appid = "example"
+    _apptoken = "example"
     _token_max_age = 60 * 60 * 4 # In seconds
 
     def __init__(self, userid, password, token, user = None):
