@@ -43,11 +43,15 @@ class toodledo:
         tasks = self.__TaskAPICall("get", args)[1:]
         rtasks = []
         for task in tasks:
-            if ("folder" in task) and (task['folder'] == "0"): del(task['folder'])
+            if "folder" in task: 
+                task['folder'] = int(task['folder'])
+                if task['folder'] == 0: del(task['folder'])
+            if "context" in task: 
+                task['context'] = int(task['context'])
+                if task['context'] == 0: del(task['context'])
             if ("tag" in task) and (task['tag'].replace(" ", '') == ""): del(task['tag'])
-            if ("context" in task) and (task['context'] == "0"): del(task['context'])
-            if ("duedate" in task) and (int(task['duedate']) <= 0): del(task['duedate'])
-            if ("completed" in task) and (int(task['completed']) <= 0): del(task['completed'])
+            if ("duedate" in task) and (task['duedate'] <= 0): del(task['duedate'])
+            if ("completed" in task) and (task['completed'] <= 0): del(task['completed'])
             rtasks.append(task)
         return rtasks
 
