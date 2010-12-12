@@ -173,6 +173,7 @@ class TaskWarriorSync(toodledo):
         tdict = dict([re.split(r'(\w+):"(.*)"', l)[1:3] for l in tlist])
         if 'due' in tdict: tdict['due'] = int(float(tdict['due']))
         if 'entry' in tdict: tdict['entry'] = int(float(tdict['entry']))
+        if 'toodledoid' in tdict: tdict['toodledoid'] = int(tdict['toodledoid'])
         if 'tags' in tdict: tdict['tags'] = [tag for tag in tdict['tags'].replace(' ', '').split(',') if tag != '']
         return tdict
 

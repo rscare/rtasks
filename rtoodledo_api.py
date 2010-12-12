@@ -183,4 +183,11 @@ class toodledo:
         rvalue = json.loads(str(urlopen(url).read(), encoding='utf-8'))
 
         if "errorCode" in rvalue: raise RemoteAPIError(rvalue["errorDesc"])
-        else: return rvalue
+        else:
+            if type(rvalue) == list:
+                for i in range(len(rvalue)):
+                    if (type(rvalue[i]) == dict) and ('id' in rvalue[i]):
+                        rvalue[i]['id'] = int(rvalue[i]['id'])
+            elif type(rvalue) == dict:
+                if 'id' in rvalue: rvalue['id'] = int(rvalue['id'])
+            return rvalue
