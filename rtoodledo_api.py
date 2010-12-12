@@ -64,7 +64,7 @@ class toodledo:
 
     def EditTasks(self, tasks):
         import json
-        return self.__TaskAPICall("add", {
+        return self.__TaskAPICall("edit", {
             "tasks" : json.dumps(tasks),
             "key" : self.__key()
             })
