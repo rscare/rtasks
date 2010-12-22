@@ -252,7 +252,9 @@ class TaskWarriorSync(toodledo):
         if len(matched_folders) == 1:
             return matched_folders[0]
         else:
-            return toodledo.AddFolder(self, folder)[0]['id']
+            new_folder = toodledo.AddFolder(self, folder)[0]
+            self._remotefolders.append(new_folder)
+            return new_folder
 
     def __ToodleToTWFolder(self, folderid):
         """Converts toodledo folder id to a folder name compatible with taskwarrior."""
