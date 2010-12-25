@@ -184,8 +184,9 @@ class TaskWarriorSync(toodledo):
         toodletask['title'] = task['description']
         if 'tags' in task:
             tlist = task['tags']
-            context = [tag for tag in tag['tags'] if tag[0] == '@'][0] # Get first context
+            context = [tag for tag in tlist if tag[0] == '@'] # Get first context
             if context: 
+                context = context[0]
                 del(tlist[tlist.index(context)])
                 toodletask['context'] = self.__TWToToodleContext(context)
             if (tlist): toodletask['tag'] = ','.join(tlist)
