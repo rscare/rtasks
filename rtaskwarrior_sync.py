@@ -312,8 +312,9 @@ if __name__ == '__main__':
         rpass_name = config.get('credentials', 'rpass_name')
         userid = config.get('credentials', 'user_id')
 
-    from rpass import GetAccountInfo
-    acinfo = GetAccountInfo(rpass_name, strict = True)[rpass_name]
+    from rpass import rpass
+    account = rpass()
+    acinfo = account.entries[rpass_name]
 
     try:
         tw = TaskWarriorSync(userid, acinfo['pass'], taskfile, compfile, cachefile, acinfo['user'])
