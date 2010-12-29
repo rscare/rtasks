@@ -57,8 +57,6 @@ class TaskWarriorSync(toodledo):
             ltasks = []
         try:
             ctasks = self.__ParseTWFile(self._compfile)
-            CFILE = open(self._compfile, 'w')
-            CFILE.close()
         except IOError:
             ctasks = []
 
@@ -80,7 +78,7 @@ class TaskWarriorSync(toodledo):
             if ntasks: toodledo.EditTasks(self, ntasks)
             # Completed tasks
             if ctasks:
-                ntasks = [self.__TWToToodledoTask(task) for task in ctasks if (task['entry'] > self._lastsync) and ('toodledoid' in task)]
+                ntasks = [self.__TWToToodledoTask(task) for task in ctasks if (task['entry'] > self._lastsync) and ('toodledoid' in task) and (task['entry'] < sync_start)]
                 if ntasks: toodledo.EditTasks(self, ntasks)
 
         # Download new tasks and edited tasks if needed
