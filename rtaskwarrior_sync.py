@@ -273,11 +273,14 @@ class TaskWarriorSync(toodledo):
         if self._remotecontextsmod or not(self._remotecontexts):
             self._remotecontexts = toodledo.GetContexts(self)
             self._remotecontextsmod = False
+
         matched_contexts = [context['id'] for context in self._remotecontexts if context['name'] == context]
         if len(matched_contexts) == 1:
             return matched_contexts[0]
         else:
-            return toodledo.AddContext(self, context)[0]['id']
+            new_context =  toodledo.AddContext(self, context)[0]['id']
+            self._remotecontexts.append(new_context)
+            return new_context
 
     def __ToodleToTWContext(self, contextid):
         """Converts toodledo context id to a taskwarrior compatible context."""
