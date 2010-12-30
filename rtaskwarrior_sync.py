@@ -272,7 +272,7 @@ class TaskWarriorSync(toodledo):
             self._remotecontexts = toodledo.GetContexts(self)
             self._remotecontextsmod = False
 
-        matched_contexts = [context['id'] for context in self._remotecontexts if context['name'] == context]
+        matched_contexts = [c['id'] for c in self._remotecontexts if c['name'] == context]
         if len(matched_contexts) == 1:
             return matched_contexts[0]
         else:
